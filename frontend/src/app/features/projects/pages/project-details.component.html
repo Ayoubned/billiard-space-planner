@@ -1,0 +1,146 @@
+<section class="details-page">
+  <a routerLink="/projects" class="back-link">
+    ← Back to projects
+  </a>
+
+  @if (isLoading()) {
+    <div class="state-message">
+      Loading project...
+    </div>
+  } @else if (errorMessage()) {
+    <div class="error-panel">
+      <h2>Project unavailable</h2>
+      <p>{{ errorMessage() }}</p>
+      <a routerLink="/projects" class="button button-primary">
+        Return to projects
+      </a>
+    </div>
+  } @else if (project(); as currentProject) {
+    <header class="details-header">
+      @if (errorMessage()) {
+  <div class="error-panel" role="alert">
+    {{ errorMessage() }}
+  </div>
+}
+      <div>
+        <p class="eyebrow">PROJECT DETAILS</p>
+        <h1>{{ currentProject.name }}</h1>
+        <p class="subtitle">
+          {{ currentProject.clientName || 'No client assigned' }}
+        </p>
+      </div>
+
+      <span
+        class="status-badge"
+        [class.status-completed]="currentProject.status === 'COMPLETED'"
+        [class.status-archived]="currentProject.status === 'ARCHIVED'"
+      >
+        {{ statusLabel(currentProject.status) }}
+      </span>
+      <div class="header-actions">
+  <a
+    class="edit-button"
+    [routerLink]="['/projects', currentProject.id, 'edit']"
+    [class.disabled]="currentProject.status === 'ARCHIVED'"
+    [attr.aria-disabled]="currentProject.status === 'ARCHIVED'"
+  >
+    Edit project
+  </a>
+
+  @if (currentProject.status !== 'ARCHIVED') {
+    <button
+      type="button"
+      class="archive-button"
+      (click)="archiveProject()"
+      [disabled]="isArchiving()"
+    >
+      {{ isArchiving() ? 'Archiving...' : 'Archive project' }}
+    </button>
+  }
+</div>
+    </header>
+
+    <section class="details-card">
+      <div class="card-heading">
+        <h2>General information</h2>
+      </div>
+
+      <div class="information-grid">
+        <div class="information-item">
+          <span>Project name</span>
+          <strong>{{ currentProject.name }}</strong>
+        </div>
+
+        <div class="information-item">
+          <span>Client</span>
+          <strong>{{ currentProject.clientName || '—' }}</strong>
+        </div>
+
+        <div class="information-item">
+          <span>Site address</span>
+          <strong>{{ currentProject.siteAddress || '—' }}</strong>
+        </div>
+
+        <div class="information-item">
+          <span>Status</span>
+          <strong>{{ statusLabel(currentProject.status) }}</strong>
+        </div>
+
+        <div class="information-item">
+          <span>Created</span>
+          <strong>
+            {{ currentProject.createdAt | date: 'dd MMM yyyy, HH:mm' }}
+          </strong>
+        </div>
+
+        <div class="information-item">
+          <span>Last updated</span>
+          <strong>
+            {{ currentProject.updatedAt | date: 'dd MMM yyyy, HH:mm' }}
+          </strong>
+        </div>
+      </div>
+
+      <div class="description-section">
+        <span>Description</span>
+        <p>{{ currentProject.description || 'No description provided.' }}</p>
+      </div>
+    </section>
+
+    <section class="details-card workflow-card">
+      <div class="card-heading">
+        <h2>Project workflow</h2>
+        <p>These sections will become available as we implement the planning workflow.</p>
+      </div>
+
+      <div class="workflow-list">
+        <div class="workflow-item">
+          <span class="workflow-number">01</span>
+          <div>
+            <strong>Floor plan</strong>
+            <p>Upload and validate the room layout.</p>
+          </div>
+          <span class="coming-soon">Next stage</span>
+        </div>
+
+        <div class="workflow-item">
+          <span class="workflow-number">02</span>
+          <div>
+            <strong>Equipment</strong>
+            <p>Select billiard tables and other equipment.</p>
+          </div>
+          <span class="coming-soon">Planned</span>
+        </div>
+
+        <div class="workflow-item">
+          <span class="workflow-number">03</span>
+          <div>
+            <strong>Layout optimization</strong>
+            <p>Generate and compare room layouts.</p>
+          </div>
+          <span class="coming-soon">Planned</span>
+        </div>
+      </div>
+    </section>
+  }
+</section>

@@ -1,0 +1,15 @@
+package fr.billiardplanner.project.domain;
+
+public enum ProjectStatus {
+    DRAFT,
+    FLOOR_PLAN_PENDING,
+    FLOOR_PLAN_PROCESSING,
+    GEOMETRY_VALIDATION,
+    EQUIPMENT_SELECTION,
+    OPTIMIZATION,
+    LAYOUT_REVIEW,
+    QUOTATION,
+    INSTALLATION_PLANNING,
+    COMPLETED,
+    ARCHIVED
+}

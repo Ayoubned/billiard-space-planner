@@ -1,0 +1,241 @@
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.edit-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: var(--color-felt);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-felt);
+    outline-offset: 4px;
+    border-radius: 3px;
+  }
+}
+
+.edit-card {
+  padding: 36px;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 3%);
+}
+
+.edit-header {
+  margin-bottom: 32px;
+
+  h1 {
+    margin: 8px 0;
+    color: var(--text-primary);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .eyebrow {
+    color: var(--color-felt);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+
+  label {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 14px;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+
+    &::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--steel, #94a3b8);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-felt);
+      box-shadow: 0 0 0 3px rgb(23 107 82 / 12%);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-danger);
+  border-radius: 8px;
+  color: var(--color-danger);
+  background: var(--surface-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.state-message {
+  padding: 48px 0;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-default);
+
+  button {
+    min-height: 42px;
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 150ms ease, border-color 150ms ease, opacity 150ms ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-felt);
+      outline-offset: 3px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .button-secondary {
+    background: var(--surface-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-default);
+
+    &:hover:not(:disabled) {
+      background: var(--surface-primary);
+      border-color: var(--text-secondary);
+    }
+  }
+
+  .button-primary {
+    background: var(--color-felt);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #12563f;
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .edit-page {
+    padding: 24px 16px;
+  }
+
+  .edit-card {
+    padding: 26px 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-page {
+    padding: 18px 12px;
+  }
+
+  .edit-card {
+    padding: 22px 16px;
+    border-radius: 10px;
+  }
+
+  .edit-header {
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
+    button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,134 @@
+
+<section class="create-page">
+  <header class="page-header">
+    <div>
+      <p class="eyebrow">PROJECT MANAGEMENT</p>
+      <h1>Create project</h1>
+      <p class="page-description">
+        Add the basic information about your billiard room project.
+      </p>
+    </div>
+  </header>
+
+  <form
+    class="project-form"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+    novalidate
+  >
+    <div class="form-section">
+      <div class="section-heading">
+        <h2>Project information</h2>
+        <p>Fields marked with * are required.</p>
+      </div>
+
+      <div class="form-field">
+        <label for="name">
+          Project name <span aria-hidden="true">*</span>
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="e.g. Downtown Billiard Club"
+          maxlength="120"
+          autocomplete="off"
+          required
+          [class.invalid]="form.controls.name.invalid &&
+            (form.controls.name.touched || submitted())"
+          [attr.aria-invalid]="form.controls.name.invalid &&
+            (form.controls.name.touched || submitted())"
+          aria-describedby="name-error"
+        />
+
+        @if (form.controls.name.invalid &&
+          (form.controls.name.touched || submitted())) {
+          <small id="name-error" class="field-error">
+            @if (form.controls.name.hasError('required') ||
+              form.controls.name.hasError('pattern')) {
+              Project name is required.
+            } @else if (form.controls.name.hasError('maxlength')) {
+              Project name cannot exceed 120 characters.
+            }
+          </small>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="clientName">Client name</label>
+
+        <input
+          id="clientName"
+          type="text"
+          formControlName="clientName"
+          placeholder="e.g. Billiard Club SARL"
+          maxlength="120"
+          autocomplete="organization"
+        />
+
+        <small class="field-hint">Optional</small>
+      </div>
+
+      <div class="form-field">
+        <label for="siteAddress">Site address</label>
+
+        <input
+          id="siteAddress"
+          type="text"
+          formControlName="siteAddress"
+          placeholder="e.g. 12 Rue de la République, Lyon"
+          maxlength="250"
+          autocomplete="street-address"
+        />
+
+        <small class="field-hint">Optional</small>
+      </div>
+
+      <div class="form-field">
+        <label for="description">Description</label>
+
+        <textarea
+          id="description"
+          formControlName="description"
+          placeholder="Add any useful information about this project..."
+          rows="5"
+          maxlength="2000"
+        ></textarea>
+
+        <small class="field-hint">
+          Optional · Maximum 2000 characters
+        </small>
+      </div>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-banner" role="alert">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <footer class="form-actions">
+      <button
+        type="button"
+        class="button button-secondary"
+        [disabled]="isSubmitting()"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        class="button button-primary"
+        [disabled]="isSubmitting()"
+      >
+        @if (isSubmitting()) {
+          Creating...
+        } @else {
+          Create project
+        }
+      </button>
+    </footer>
+  </form>
+</section>

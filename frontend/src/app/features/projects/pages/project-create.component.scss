@@ -1,0 +1,270 @@
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.create-page {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.page-header {
+  margin-bottom: 28px;
+
+  h1 {
+    margin: 6px 0 8px;
+    color: var(--text-primary);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--color-felt);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.page-description {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project-form {
+  overflow: hidden;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgb(15 23 42 / 3%);
+}
+
+.form-section {
+  padding: 32px;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+
+  h2 {
+    margin: 0 0 7px;
+    color: var(--text-primary);
+    font-size: 17px;
+    font-weight: 650;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    margin-bottom: 8px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+
+    span {
+      color: var(--color-danger);
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 14px;
+    color: var(--text-primary);
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    outline: none;
+    font: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+
+    &::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: #94a3b8;
+    }
+
+    &:focus {
+      border-color: var(--color-felt);
+      box-shadow: 0 0 0 3px rgb(23 107 82 / 12%);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  input.invalid,
+  textarea.invalid {
+    border-color: var(--color-danger);
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgb(220 38 38 / 10%);
+    }
+  }
+}
+
+.field-hint {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.field-error {
+  margin-top: 6px;
+  color: var(--color-danger);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.error-banner {
+  margin: 0 32px 24px;
+  padding: 14px 16px;
+  color: var(--color-danger);
+  background: var(--surface-secondary);
+  border: 1px solid var(--color-danger);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 32px;
+  background: var(--surface-secondary);
+  border-top: 1px solid var(--border-default);
+}
+
+.button {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, opacity 150ms ease;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-felt);
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.button-primary {
+  color: white;
+  background: var(--color-felt);
+
+  &:hover:not(:disabled) {
+    background: #12563f;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+.button-secondary {
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  border-color: var(--border-default);
+
+  &:hover:not(:disabled) {
+    background: var(--surface-secondary);
+    border-color: #94a3b8;
+  }
+}
+
+@media (max-width: 760px) {
+  .create-page {
+    padding: 24px 16px;
+  }
+
+  .form-section {
+    padding: 24px;
+  }
+
+  .form-actions {
+    padding: 18px 24px;
+  }
+
+  .error-banner {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-page {
+    padding: 18px 12px;
+  }
+
+  .page-header h1 {
+    font-size: 26px;
+  }
+
+  .form-section {
+    padding: 20px 16px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    padding: 16px;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .error-banner {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+}

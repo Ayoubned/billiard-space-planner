@@ -1,0 +1,93 @@
+<main class="edit-page">
+  <a class="back-link" routerLink="/projects">
+    ← Back to projects
+  </a>
+
+  @if (isLoading()) {
+    <div class="state-message">Loading project...</div>
+  } @else {
+    <section class="edit-card">
+      <header class="edit-header">
+        <p class="eyebrow">PROJECT MANAGEMENT</p>
+        <h1>Edit project</h1>
+        <p>Update the project information below.</p>
+      </header>
+
+      @if (errorMessage()) {
+        <div class="error-message" role="alert">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-field">
+          <label for="name">Project name *</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            maxlength="120"
+            placeholder="e.g. Billiard room Lyon"
+          />
+          @if (form.controls.name.touched && form.controls.name.invalid) {
+            <small class="field-error">
+              A project name is required (maximum 120 characters).
+            </small>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="clientName">Client name</label>
+          <input
+            id="clientName"
+            type="text"
+            formControlName="clientName"
+            maxlength="120"
+            placeholder="Client or company"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="siteAddress">Site address</label>
+          <input
+            id="siteAddress"
+            type="text"
+            formControlName="siteAddress"
+            maxlength="250"
+            placeholder="Installation address"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            maxlength="2000"
+            rows="5"
+            placeholder="Additional project information..."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="button"
+            class="button-secondary"
+            (click)="cancel()"
+            [disabled]="isSaving()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="button-primary"
+            [disabled]="isSaving() || isLoading()"
+          >
+            {{ isSaving() ? 'Saving...' : 'Save changes' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+</main>
