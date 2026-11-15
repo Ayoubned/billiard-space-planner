@@ -23,3 +23,15 @@ for billiard equipment shops.
 ```powershell
 docker compose up -d database
 ```
+
+## Start Backend
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+## Start Frontend
+
+```powershell
+npm run start:local
+```
