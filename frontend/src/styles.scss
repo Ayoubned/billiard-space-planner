@@ -1,0 +1,58 @@
+:root {
+  // Main palette
+  --color-midnight: #111827;
+  --color-slate: #1f2937;
+  --color-felt: #176b52;
+  --color-brass: #c89b58;
+
+  // Neutral colors
+  --color-paper: #f8fafc;
+  --color-steel: #64748b;
+
+  // Semantic colors
+  --color-success: #16a34a;
+  --color-warning: #dc6b4e;
+  --color-danger: #dc2626;
+
+  // Application surfaces
+  --app-background: #f8fafc;
+  --surface-primary: #ffffff;
+  --surface-secondary: #f1f5f9;
+
+  // Text
+  --text-primary: #111827;
+  --text-secondary: #64748b;
+
+  // Borders
+  --border-default: #e2e8f0;
+
+  // Typography
+  --font-family: Inter, sans-serif;
+
+  // Layout
+  --sidebar-width: 250px;
+  --toolbar-height: 64px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--app-background);
+  color: var(--text-primary);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

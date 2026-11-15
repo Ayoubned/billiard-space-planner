@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: billiard-space-planner
+
+  profiles:
+    default: local
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: planner
+        format_sql: true
+
+  flyway:
+    enabled: true
+    default-schema: planner
+    schemas: planner
+    create-schemas: true
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 55MB
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  storage:
+    path: ${FILE_STORAGE_PATH:./storage}
