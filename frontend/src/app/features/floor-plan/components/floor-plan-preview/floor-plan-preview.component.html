@@ -1,0 +1,64 @@
+
+<button
+  type="button"
+  class="preview-button"
+  (click)="openPreview()"
+  [disabled]="isLoading()"
+>
+  Preview
+</button>
+
+@if (isOpen()) {
+  <div class="preview-overlay" (click)="closePreview()">
+    <section
+      class="preview-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Floor plan preview"
+      (click)="$event.stopPropagation()"
+    >
+      <header class="preview-header">
+        <div class="preview-title">
+          <h2>Floor plan preview</h2>
+          <span>{{ floorPlan().originalFilename }}</span>
+        </div>
+
+        <button
+          type="button"
+          class="close-button"
+          aria-label="Close preview"
+          (click)="closePreview()"
+        >
+          &times;
+        </button>
+      </header>
+
+      <div class="preview-content">
+        @if (isLoading()) {
+          <div class="preview-state">
+            Loading preview...
+          </div>
+        } @else if (errorMessage()) {
+          <div class="preview-state preview-error" role="alert">
+            {{ errorMessage() }}
+          </div>
+        } @else if (previewUrl()) {
+          @if (isPdf) {
+            <iframe
+              class="pdf-viewer"
+              [src]="safePreviewUrl()"
+              title="PDF floor plan preview"
+            ></iframe>
+          } @else {
+            <div class="image-viewer">
+              <img
+                [src]="previewUrl()"
+                [alt]="floorPlan().originalFilename"
+              />
+            </div>
+          }
+        }
+      </div>
+    </section>
+  </div>
+}

@@ -1,0 +1,115 @@
+<section class="floor-plans-card">
+  <div class="section-heading">
+    <div>
+      <h2>Floor plans</h2>
+      <p>Upload and manage the room drawings for this project.</p>
+    </div>
+
+    @if (floorPlans().length > 0) {
+      <span class="floor-plan-count">
+        {{ floorPlans().length }}
+        {{ floorPlans().length === 1 ? 'file' : 'files' }}
+      </span>
+    }
+  </div>
+
+  @if (!archived()) {
+    <app-floor-plan-upload
+      [projectId]="projectId()"
+      (uploaded)="onFloorPlanUploaded($event)"
+    />
+  } @else {
+    <p class="archived-notice">
+      This project is archived. Floor plans can no longer be uploaded.
+    </p>
+  }
+
+  <div class="floor-plan-list">
+    <div class="list-heading">
+      <h3>Uploaded files</h3>
+
+      <button
+        type="button"
+        class="refresh-button"
+        (click)="loadFloorPlans()"
+        [disabled]="isLoading()"
+      >
+        {{ isLoading() ? 'Refreshing...' : 'Refresh' }}
+      </button>
+    </div>
+    @if (actionErrorMessage()) {
+      <div class="floor-plan-error" role="alert">
+        {{ actionErrorMessage() }}
+      </div>
+    }
+
+    @if (isLoading() && floorPlans().length === 0) {
+      <p class="floor-plan-empty">Loading floor plans...</p>
+    } @else if (errorMessage()) {
+      <div class="floor-plan-error" role="alert">
+        {{ errorMessage() }}
+
+        <button
+          type="button"
+          class="refresh-button"
+          (click)="loadFloorPlans()"
+        >
+          Try again
+        </button>
+      </div>
+    } @else if (floorPlans().length === 0) {
+      <div class="floor-plan-empty">
+        No floor plans uploaded yet.
+      </div>
+    } @else {
+      @for (floorPlan of floorPlans(); track floorPlan.id) {
+        <article class="floor-plan-item">
+          <div class="floor-plan-file-icon">
+            {{ floorPlan.contentType === 'application/pdf' ? 'PDF' : 'IMG' }}
+          </div>
+
+          <div class="floor-plan-information">
+            <strong>{{ floorPlan.originalFilename }}</strong>
+
+            <span>
+              {{ formatFileSize(floorPlan.fileSizeBytes) }}
+              ·
+              {{ floorPlan.createdAt | date: 'dd MMM yyyy, HH:mm' }}
+            </span>
+          </div>
+
+          <span
+            class="floor-plan-status"
+            [class.status-ready]="floorPlan.status === 'READY'"
+            [class.status-processing]="floorPlan.status === 'PROCESSING'"
+            [class.status-failed]="floorPlan.status === 'FAILED'"
+          >
+            {{ floorPlanStatusLabel(floorPlan.status) }}
+          </span>
+          
+          <app-floor-plan-preview
+            [projectId]="projectId()"
+            [floorPlan]="floorPlan"
+          />
+          <button
+            type="button"
+            class="file-action-button"
+            (click)="downloadFloorPlan(floorPlan)"
+            [disabled]="downloadingId() !== null"
+          >
+            {{ downloadingId() === floorPlan.id ? 'Downloading...' : 'Download' }}
+          </button>
+
+          <button
+            type="button"
+            class="file-action-button delete-button"
+            (click)="deleteFloorPlan(floorPlan)"
+            [disabled]="deletingId() !== null"
+          >
+            {{ deletingId() === floorPlan.id ? 'Deleting...' : 'Delete' }}
+          </button>
+        </article>
+      }
+    }
+  </div>
+</section>

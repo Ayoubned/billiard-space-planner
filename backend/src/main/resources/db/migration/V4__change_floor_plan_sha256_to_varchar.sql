@@ -1,0 +1,2 @@
+ALTER TABLE planner.floor_plans
+ALTER COLUMN sha256 TYPE VARCHAR(64);

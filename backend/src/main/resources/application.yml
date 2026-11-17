@@ -22,8 +22,8 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 55MB
+      max-file-size: 25MB
+      max-request-size: 26MB
 
 server:
   port: 8080
@@ -44,3 +44,7 @@ springdoc:
 app:
   storage:
     path: ${FILE_STORAGE_PATH:./storage}
+
+billiard-planner:
+  storage:
+    floor-plans-directory: ./data/floor-plans

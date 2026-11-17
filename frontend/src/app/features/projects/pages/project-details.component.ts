@@ -9,11 +9,11 @@ import {
   ProjectStatus,
 } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project.service';
-
+import { FloorPlanSectionComponent } from '../../floor-plan/components/floor-plan-section/floor-plan-section.component';
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, FloorPlanSectionComponent],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss',
 })
@@ -26,6 +26,7 @@ export class ProjectDetailsComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly isArchiving = signal(false);
   readonly errorMessage = signal<string | null>(null);
+
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -61,6 +62,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
   }
 
+
   archiveProject(): void {
     const currentProject = this.project();
 
@@ -95,6 +97,7 @@ export class ProjectDetailsComponent implements OnInit {
     });
   }
 
+
   statusLabel(status: ProjectStatus): string {
     const labels: Record<ProjectStatus, string> = {
       DRAFT: 'Draft',
@@ -112,4 +115,6 @@ export class ProjectDetailsComponent implements OnInit {
 
     return labels[status];
   }
+
+
 }

@@ -114,14 +114,18 @@
       </div>
 
       <div class="workflow-list">
-        <div class="workflow-item">
-          <span class="workflow-number">01</span>
-          <div>
-            <strong>Floor plan</strong>
-            <p>Upload and validate the room layout.</p>
+        
+          <div class="workflow-item">
+            <span class="workflow-number">01</span>
+
+            <div>
+              <strong>Floor plan</strong>
+              <p>Upload and validate the room layout.</p>
+            </div>
+
+            <span class="coming-soon">In progress</span>
           </div>
-          <span class="coming-soon">Next stage</span>
-        </div>
+
 
         <div class="workflow-item">
           <span class="workflow-number">02</span>
@@ -142,5 +146,11 @@
         </div>
       </div>
     </section>
+
+<app-floor-plan-section
+  [projectId]="currentProject.id"
+  [archived]="currentProject.status === 'ARCHIVED'"
+/>
+
   }
 </section>

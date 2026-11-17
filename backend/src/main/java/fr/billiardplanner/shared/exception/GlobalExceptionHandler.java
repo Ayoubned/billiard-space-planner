@@ -1,5 +1,6 @@
 package fr.billiardplanner.shared.exception;
 
+import fr.billiardplanner.floorplan.application.FloorPlanNotFoundException;
 import fr.billiardplanner.project.application.ProjectNotFoundException;
 
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,11 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ProjectNotFoundException.class)
-    public ProblemDetail handleProjectNotFound(
-            ProjectNotFoundException exception
-    ) {
+    @ExceptionHandler({
+            ProjectNotFoundException.class,
+            FloorPlanNotFoundException.class
+    })
+    public ProblemDetail handleNotFound(RuntimeException exception) {
         return ProblemDetail.forStatusAndDetail(
                 HttpStatus.NOT_FOUND,
                 exception.getMessage()
