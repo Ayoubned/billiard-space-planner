@@ -4,8 +4,8 @@
 !.env.example
 
 # Local storage
-storage/
 .data/
+data/
 
 # Java / Maven
 backend/target/
